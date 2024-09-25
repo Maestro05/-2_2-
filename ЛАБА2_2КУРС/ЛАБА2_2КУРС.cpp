@@ -260,6 +260,35 @@ void Seventh(int index1, int* index2)
 
 }
 
+void Menu(int* index1)
+{
+    char text[] = "Выбор действия";
+    int choice;
+    int index2 = 0;
+    do
+    {
+        printf("Оформить заказ:\n\n1.Главное блюдо\n\n2.Закуски\n\n3.Десерты\n\n4.Комбо\n\n5.Напитки\n\n6.Милкшейки\n\n7.Соусы\n\n8.Перейти к корзинке\n\n9.Выход\n");
+        choice = Select(1, 9, text);
+        if ((*index1) < 5)
+        {
+            if (choice == 1) { First(*index1, &index2); }
+            else if (choice == 2) { Second(*index1, &index2); }
+            else if (choice == 3) { Third(*index1, &index2); }
+            else if (choice == 4) { Fourth(*index1, &index2); }
+            else if (choice == 5) { Fiveth(*index1, &index2); }
+            else if (choice == 6) { Sixth(*index1, &index2); }
+            else if (choice == 7) { Seventh(*index1, &index2); }
+            else if (choice == 8) { (*index1)++; Korzinka(index1, index2); index2 = 0; }
+            else return;
+            system("cls");
+        }
+        else
+        {
+            system("cls");
+            printf("Переполнены заказы\n\n");
+        }
+    } while (choice != 9);
+}
 
 int main()
 {
@@ -267,6 +296,7 @@ int main()
     int index1 = 0;
     char exit;
 
+    Menu(&index1);
 }
 
 
