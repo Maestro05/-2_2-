@@ -65,6 +65,55 @@ int Select(int a, int b, char text[])
     return selection;
 }
 
+void Information(int index1, int* index2)
+{
+    system("cls");
+    char text[] = "Выбор действия";
+    char text2[] = "Количество";
+    printf("Информация о заказе %s:\n", plate[index1][*index2].name);
+    printf("Калорий: %d\nВес: %.1lf г\nЦена: %d", plate[index1][*index2].calories, plate[index1][*index2].weight, plate[index1][*index2].price);
+    printf("\n----------------------\n");
+    printf("1.Заказать\n\n2.Назад\n");
+    int choice = Select(1, 2, text);
+    if (choice == 1)
+    {
+        printf("\n");
+        plate[index1][*index2].kol = Select(1, 100, text2);
+        (*index2)++;
+    }
+    else return;
+}
+
+void Korzinka(int* index1, int index2)
+{
+    system("cls");
+    char exit;
+    if (plate[*index1 - 1][0].kol != 0)
+    {
+        int allprice = 0;
+        printf("Корзинка Чек №%d:\n\n", *index1);
+        for (int i = 0; i < index2; i++)
+        {
+            printf("%-39s %-3d шт. x %-20d\n", plate[*index1 - 1][i].name, plate[*index1 - 1][i].kol, plate[*index1 - 1][i].price);
+            allprice += plate[*index1 - 1][i].price * plate[*index1 - 1][i].kol;
+        }
+        printf("----------------------\nОбщая сумма покупи: %d\n\n", allprice);
+        do
+        {
+            printf("Нажмите на q, чтобы вернуться в меню\n");
+        } while ((exit = _getch()) != 'q');
+    }
+    else
+    {
+        (*index1)--;
+        printf("В корзинке пусто!\n\n");
+        do
+        {
+            printf("Нажмите на q, чтобы вернуться в меню\n");
+        } while ((exit = _getch()) != 'q');
+        return;
+    }
+}
 
 
 int main()
